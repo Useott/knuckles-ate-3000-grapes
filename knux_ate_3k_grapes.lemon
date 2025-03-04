@@ -1,0 +1,124 @@
+#define KNUX_ATE_3K_GRAPES = 040325
+
+// Zone constants - Zone and Act
+constant u16 AIZ1 = 0x0000
+constant u16 AIZ2 = 0x0001
+constant u16 HCZ1 = 0x0100
+constant u16 HCZ2 = 0x0101
+constant u16 MGZ1 = 0x0200
+constant u16 MGZ2 = 0x0201
+constant u16 CNZ1 = 0x0300
+constant u16 CNZ2 = 0x0301
+constant u16 ICZ1 = 0x0500
+constant u16 ICZ2 = 0x0501
+constant u16 LBZ1 = 0x0600
+constant u16 LBZ2 = 0x0601
+
+constant u16 MHZ1 = 0x0700
+constant u16 MHZ2 = 0x0701
+constant u16 FBZ1 = 0x0400
+constant u16 FBZ2 = 0x0401
+constant u16 SOZ1 = 0x0800
+constant u16 SOZ2 = 0x0801
+constant u16 LRZ1 = 0x0900
+constant u16 LRZ2 = 0x0901
+constant u16 LRZ3 = 0x1600
+constant u16 HPZ = 0x1601
+constant u16 EMERALD_ALTAR = 0x1701
+constant u16 SSZS = 0x0a00
+constant u16 SSZK = 0x0a01
+constant u16 DEZ1 = 0x0b00
+constant u16 DEZ2 = 0x0b01
+constant u16 DEZ3 = 0x1700
+constant u16 DDZ = 0x0c00
+
+// Zone constants - Zone alone
+constant u16 AIZ = 0x00
+constant u16 HCZ = 0x01
+constant u16 MGZ = 0x02
+constant u16 CNZ = 0x03
+constant u16 ICZ = 0x05
+constant u16 LBZ = 0x06
+
+constant u8 MHZ = 0x07
+constant u8 FBZ = 0x04
+constant u8 SOZ = 0x08
+constant u8 LRZ = 0x09
+constant u8 SSZ = 0x0a
+constant u8 DEZ = 0x0b
+constant u8 DDZ = 0x0c
+
+constant u8 ENDING = 0x0d
+constant u8 ALZ = 0x0e
+constant u8 BPZ = 0x0f
+constant u8 CGZ = 0x11
+constant u8 DPZ = 0x10
+constant u8 EMZ = 0x12
+
+constant u8 BONUS_GUMBALL = 0x13
+constant u8 BONUS_SPHERES = 0x14
+constant u8 BONUS_SLOT = 0x15
+
+
+constant u8 ACT1 = 0
+constant u8 ACT2 = 1
+
+// ------------------------------------------------------------------------------------------------------
+
+global u8 mhz.season
+constant u8 season.SUMMER = 0
+constant u8 season.FALL = 1
+constant u8 season.AUTUMN = 1
+constant u8 season.WINTER = 2
+
+define bool fbz.isOutdoors = u8[0xfffffe10] == FBZ && u8[0xffffeed6] > 0 // For the last section in FBZ2, use camera.position.x.u16 + getScreenWidth() > 0x2c80 instead of fbz.isOutdoors
+
+// ------------------------------------------------------------------------------------------------------
+
+//# address-hook(0x055098) end(0x0550a6)
+function void fn055098()
+{
+	base.fn055098()
+	mhz.season = season.FALL
+}
+
+//# address-hook(0x0550a8) end(0x0550b6)
+function void fn0550a8()
+{
+	base.fn0550a8()
+	mhz.season = season.SUMMER
+}
+
+//# address-hook(0x07654a) end(0x076602)
+function void fn07654a()
+{
+	base.fn07654a()
+	if (u8[A0 + 0x28] != 0)
+		return
+	mhz.season = season.SUMMER
+}
+
+//# address-hook(0x0550b8) end(0x0550c0)
+function void fn0550b8()
+{
+	base.fn0550b8()
+	mhz.season = season.WINTER
+}
+
+//# address-hook(0x054d30) end(0x054d88)
+function void InitLevelTiles.MHZ2()
+{
+	if (u16[0xffffb000 + 0x10] < 0x09c0 && u16[0xffffb000 + 0x14] >= 0x0600)
+		mhz.season = season.SUMMER
+	else if (u16[0xffffb000 + 0x10] < 0x2940)
+		mhz.season = season.FALL
+	else mhz.season = season.WINTER
+	base.InitLevelTiles.MHZ2()
+}
+
+//# address-hook(0x054ab6) end(0x054b1c)
+function void InitLevelTiles.MHZ1()
+{
+	mhz.season = season.SUMMER
+	base.InitLevelTiles.MHZ1()
+}
