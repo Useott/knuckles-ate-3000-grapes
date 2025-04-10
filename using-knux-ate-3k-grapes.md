@@ -69,4 +69,5 @@ BONUS_ITEMBALL, BONUS_SPHERES and BONUS_SLOT
 
 ## Functions
 
-Looks empty here... seems like no functions that return anything have been added.
+`u32 findObjectSlotWithUpdateAddress(u32 address)`
+- Searches through 90 object slots starting from `0xffffb128` until it finds an object with its update address set to the desired one
