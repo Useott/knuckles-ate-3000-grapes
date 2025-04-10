@@ -106,6 +106,18 @@ function u8 loadExternalPaletteDataToAtex(string key, u8 line, u16 atex, bool no
 	return numColors
 }
 
+function void YeetPlayer2()
+{
+	u32 bA0 = A0
+	A0 = 0xffffb04a
+	char.position.y.u16 += global.inv_gravity ? 2 : -2
+	char.flags |= char.flag.IN_AIR
+	char.velocity.x = (char.flags & char.flag.FACING_LEFT) ? -0x1000 : 0x1000
+	char.velocity.y = -0x300
+	char.state = char.state.FALLING_PANIC
+	A0 = bA0
+}
+
 // ------------------------------------------------------------------------------------------------------
 
 //# address-hook(0x055098) end(0x0550a6)

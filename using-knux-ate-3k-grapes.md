@@ -2,7 +2,7 @@
 
 **Note: This file is meant to be viewed within GitHub. If your text viewer doesn't support Markdown, some things may not appear as intended.**
 
-To start, add this line inside your mod's main.lemon:
+To start, add this to your mod's main.lemon:
 ```
 #if !KNUX_ATE_3K_GRAPES
 	include ../../../../knux_ate_3k_grapes.lemon
@@ -87,3 +87,7 @@ BONUS_ITEMBALL, BONUS_SPHERES and BONUS_SLOT
 	- If `nonfading` is true, the palette will be loaded to the non-fading palette location (used when fading in from black or white)
 	- If `underwater` is true, the palette will be loaded to the secondary palette location.
 - Returns the number of colors loaded.
+
+`void YeetPlayer2()`
+- Throw the second character into the distance.
+- Tails hates you.
