@@ -3,9 +3,15 @@
 **Note: This file is meant to be viewed within GitHub. If your text viewer doesn't support Markdown, some things may not appear as intended.**
 
 To start, add this line inside your mod's main.lemon:
-`include ../../../../knux_ate_3k_grapes.lemon`
+```
+#if !KNUX_ATE_3K_GRAPES
+	include ../../../../knux_ate_3k_grapes.lemon
+#endif
+```
 
 **IMPORTANT!** While you're developing a mod, you'll most likely have the mod as a uncompressed folder (path goes like `/mods/coolmod01/...`), so you'll need to remove one `../` from the include line. This is because it will be looking at the wrong folder. Remember to add it back when compressing your mod to upload it on any file hosting platform!
+
+The preprocessor check is there so the mod doesn't load the file if there's already a mod that is using it.
 
 Now, with the basic stuff out of the way, let's get into what this single file offers:
 
@@ -70,7 +76,7 @@ BONUS_ITEMBALL, BONUS_SPHERES and BONUS_SLOT
 ## Functions
 
 `u32 findObjectSlotWithUpdateAddress(u32 address)`
-- Searches through 90 object slots starting from `0xffffb128` until it finds an object with its update address set to the desired one
+- Searches through 90 object slots starting from `0xffffb128` until it finds an object with its update address set to the desired one.
 
 `u8 loadExternalPaletteDataToAtex(string key, u8 line, u16 atex, bool nonfading, bool underwater)`
 - Loads a palette file to memory in one of the palette indexes.
