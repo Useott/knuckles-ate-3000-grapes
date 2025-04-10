@@ -71,3 +71,13 @@ BONUS_ITEMBALL, BONUS_SPHERES and BONUS_SLOT
 
 `u32 findObjectSlotWithUpdateAddress(u32 address)`
 - Searches through 90 object slots starting from `0xffffb128` until it finds an object with its update address set to the desired one
+
+`u8 loadExternalPaletteDataToAtex(string key, u8 line, u16 atex, bool nonfading, bool underwater)`
+- Loads a palette file to memory in one of the palette indexes.
+- Parameters:
+	- `key` is the palette's filename (without .png).
+	- `line` is the line to load from.
+	- `atex` works the same as `Renderer.drawSprite`.
+	- If `nonfading` is true, the palette will be loaded to the non-fading palette location (used when fading in from black or white)
+	- If `underwater` is true, the palette will be loaded to the secondary palette location.
+- Returns the number of colors loaded.

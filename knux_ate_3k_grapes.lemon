@@ -90,6 +90,24 @@ function u32 findObjectSlotWithUpdateAddress(u32 address)
 	return value
 }
 
+// You know those PNG palettes you put in the palettes folder? This makes loading them easier. Return the number of colors loaded.
+function u8 loadExternalPaletteDataToAtex(string key, u8 line, u16 atex, bool nonfading, bool underwater)
+{
+	u16 numColors = System.loadExternalPaletteData(key, line, 0x800000, 0x20)
+	u32 memad = nonfading && underwater ? 0xfffff000 : nonfading ? 0xfffffc80 : underwater ? 0xfffff080 : 0xfffffc00
+	u32 shmad = nonfading && underwater ? 0x802480 : nonfading ? 0x802180 : underwater ? 0x802300 : 0x802000
+	shmad -= 0x80
+	u32 address = (atex >= 0x40 ? shmad : memad) + atex * 2
+	for (u16 i = 0; i < numColors; ++i)
+	{
+		u16[address + i * 2] = packColor(u32[0x800000 + i * 4])
+	}
+	
+	return numColors
+}
+
+// ------------------------------------------------------------------------------------------------------
+
 //# address-hook(0x055098) end(0x0550a6)
 function void fn055098()
 {
