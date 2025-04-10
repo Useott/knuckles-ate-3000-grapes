@@ -12,7 +12,7 @@ Now, with the basic stuff out of the way, let's get into what this single file o
 ## Constants
 
 You can identify each zone with a name instead of numbers.
-Examples: `CNZ2`, `LRZ3`, `SSZK`, `BONUS_GUMBALL`
+Examples: `CNZ2`, `LRZ3`, `SSZK`, `BONUS_ITEMBALL`
 
 You can also use `ACT1` and `ACT2` instead of 0x00 and 0x01.
 
@@ -51,7 +51,7 @@ DDZ and ENDING
 
 ALZ, BPZ, CGZ, DPZ and EMZ
 
-BONUS_GUMBALL, BONUS_SPHERES and BONUS_SLOT
+BONUS_ITEMBALL, BONUS_SPHERES and BONUS_SLOT
 ```
 
 </details>

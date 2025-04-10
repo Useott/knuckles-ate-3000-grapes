@@ -1,4 +1,4 @@
-#define KNUX_ATE_3K_GRAPES = 040325
+#define KNUX_ATE_3K_GRAPES = 0x040325
 
 // Zone constants - Zone and Act
 constant u16 AIZ1 = 0x0000
@@ -55,7 +55,7 @@ constant u8 CGZ = 0x11
 constant u8 DPZ = 0x10
 constant u8 EMZ = 0x12
 
-constant u8 BONUS_GUMBALL = 0x13
+constant u8 BONUS_ITEMBALL = 0x13
 constant u8 BONUS_SPHERES = 0x14
 constant u8 BONUS_SLOT = 0x15
 
@@ -74,6 +74,21 @@ constant u8 season.WINTER = 2
 define bool fbz.isOutdoors = u8[0xfffffe10] == FBZ && u8[0xffffeed6] > 0 // For the last section in FBZ2, use camera.position.x.u16 + getScreenWidth() > 0x2c80 instead of fbz.isOutdoors
 
 // ------------------------------------------------------------------------------------------------------
+
+// Find an object slot with a specified update address, then return it
+function u32 findObjectSlotWithUpdateAddress(u32 address)
+{
+	u32 value
+	for (u8 slot; slot < 0x59; ++slot) // 90 objects we'll look through
+	{
+		if (u32[0xffffb128 + (slot * 0x4a)] == address)
+		{
+			value = 0xffffb128 + (slot * 0x4a)
+			break
+		}
+	}
+	return value
+}
 
 //# address-hook(0x055098) end(0x0550a6)
 function void fn055098()
