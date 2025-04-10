@@ -23,6 +23,7 @@ You can also use `ACT1` and `ACT2` instead of 0x00 and 0x01.
 ACT1 and ACT2
 
 AIZ, AIZ1 and AIZ2
+
 HCZ, HCZ1 and HCZ2
 
 MGZ, MGZ1 and MGZ2
@@ -58,12 +59,12 @@ BONUS_ITEMBALL, BONUS_SPHERES and BONUS_SLOT
 
 ## Variables and defines
 
-`u8 mhz.season` - Use this to tell what's the current season in MHZ2. Its set to `season.SUMMER` in MHZ1.
+`u8 mhz.season` - Variable made to tell what's the current season in MHZ2. It's set to `season.SUMMER` in MHZ1.
 - `season.SUMMER`
-- `season.FALL` OR `season.AUTUMN`
+- `season.FALL` or `season.AUTUMN`
 - `season.WINTER`
 
-`bool fbz.isOutdoors` - Use this to tell if you're outside the ship in Flying Battery Zone.
+`bool fbz.isOutdoors` - Define made to tell if you're outside the ship in Flying Battery Zone.
 - Important note: This does not cover the boss area in FBZ2. Use `camera.position.x.u16 + getScreenWidth() > 0x2c80` to check for that specific area.
 
 ## Functions
