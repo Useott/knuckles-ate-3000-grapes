@@ -5,7 +5,7 @@
 To start, add this to your mod's main.lemon:
 ```
 #if !KNUX_ATE_3K_GRAPES
-	include ../../../../knux_ate_3k_grapes.lemon
+	include ../../../../knux_ate_3k_grapes
 #endif
 ```
 
